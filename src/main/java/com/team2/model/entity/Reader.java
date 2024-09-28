@@ -21,13 +21,13 @@ public class Reader {
     @Column(name = "fullname")
     private String fullname;
 
-
-    private String email;
-    private String password;
-
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }
