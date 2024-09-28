@@ -17,8 +17,8 @@ public class Favorite {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_favorite_user"))
-    private User user;
+    @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_favorite_reader"))
+    private Reader reader;
 
     @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)
     private List<CollectionArticle> collectionArticles;

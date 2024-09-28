@@ -1,5 +1,5 @@
--- Datos para la tabla users
-INSERT INTO users (id, first_name, last_name, fullname, email, password, created_at, updated_at) VALUES
+-- Datos para la tabla readers
+INSERT INTO readers (id, first_name, last_name, fullname, email, password, created_at, updated_at) VALUES
                                                                                                      (1, 'Alice', 'Brown', 'Alice Brown', 'alice@example.com', 'password123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                                      (2, 'Bob', 'Green', 'Bob Green', 'bob@example.com', 'password456', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
                                                                                                      (3, 'Charlie', 'Black', 'Charlie Black', 'charlie@example.com', 'password789', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
@@ -26,7 +26,7 @@ INSERT INTO plans (id, type, price) VALUES
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla subscriptions
-INSERT INTO subscriptions (id, price, duration, status, subscription_date, end_date, payment_status, plan_id, user_id) VALUES
+INSERT INTO subscriptions (id, price, duration, status, subscription_date, end_date, payment_status, plan_id, reader_id) VALUES
                                                                                                                            (1, '9.99', '1 Month', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '1 MONTH', 'PAID', 1, 1),
                                                                                                                            (2, '29.99', '3 Months', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '3 MONTHS', 'PAID', 2, 2)
     ON CONFLICT DO NOTHING;
@@ -46,7 +46,7 @@ INSERT INTO detail_articles (id, name, url, file, article_id) VALUES
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla favorites
-INSERT INTO favorites (id, name, user_id) VALUES
+INSERT INTO favorites (id, name, reader_id) VALUES
                                               (1, 'Favorite Articles', 1),
                                               (2, 'My Reading List', 2)
     ON CONFLICT DO NOTHING;
@@ -59,14 +59,14 @@ INSERT INTO collection_articles (favorite_id, article_id, added_date) VALUES
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla comments
-INSERT INTO comments (id, content, date, author, user_id, article_id) VALUES
+INSERT INTO comments (id, content, date, author, reader_id, article_id) VALUES
                                                                           (1, 'Great article!', CURRENT_TIMESTAMP, 'Alice', 1, 1),
                                                                           (2, 'Very informative, thanks!', CURRENT_TIMESTAMP, 'Bob', 2, 2),
                                                                           (3, 'I love these suggestions!', CURRENT_TIMESTAMP, 'Charlie', 3, 3)
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla notifications
-INSERT INTO notifications (id, type, message, publication_date, user_id) VALUES
+INSERT INTO notifications (id, type, message, publication_date, reader_id) VALUES
                                                                              (1, 'INFO', 'Welcome to the platform!', CURRENT_TIMESTAMP, 1),
                                                                              (2, 'REMINDER', 'Your subscription will expire soon.', CURRENT_TIMESTAMP, 2)
     ON CONFLICT DO NOTHING;

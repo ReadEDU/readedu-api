@@ -17,8 +17,8 @@ public class Comment {
     private String author;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_comment_user"))
-    private User user;
+    @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_comment_reader"))
+    private Reader reader;
 
     @ManyToOne
     @JoinColumn(name = "article_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_comment_article"))
