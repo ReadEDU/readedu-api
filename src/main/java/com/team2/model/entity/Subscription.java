@@ -31,6 +31,6 @@ public class Subscription {
     private Plan plan;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_subscription_user"))
-    private User user;
+    @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_subscription_reader"))
+    private Reader reader;
 }

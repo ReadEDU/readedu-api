@@ -19,6 +19,6 @@ public class Notification {
     private LocalDateTime publicationDate;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_notification_user"))
-    private User user;
+    @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_notification_reader"))
+    private Reader user;
 }

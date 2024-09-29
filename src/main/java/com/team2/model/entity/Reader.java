@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "authors")
-public class Author {
+@Table(name = "readers")
+public class Reader {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,10 +18,10 @@ public class Author {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "profile")
-    private String profile;
+    @Column(name = "fullname")
+    private String fullname;
 
-    @Column(name = "created_at",nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
