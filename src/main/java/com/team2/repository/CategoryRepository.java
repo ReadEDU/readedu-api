@@ -1,5 +1,7 @@
 package com.team2.repository;
 
-public interface CategoryRepository {
-    void hello ();
+import com.team2.model.entity.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
 }
