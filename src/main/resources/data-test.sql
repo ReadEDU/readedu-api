@@ -46,10 +46,10 @@ INSERT INTO subscriptions (id, price, duration, status, subscription_date, end_d
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla articles
-INSERT INTO articles (id, title, content, publication_date, author_id, category_id) VALUES
-                                                                                        (1, 'The Rise of AI', 'An in-depth look at artificial intelligence and its impact.', CURRENT_TIMESTAMP, 1, 1),
-                                                                                        (2, 'Healthy Living Tips', 'Tips and tricks for a healthier lifestyle.', CURRENT_TIMESTAMP, 2, 2),
-                                                                                        (3, 'Top 10 Travel Destinations', 'Explore the best places to visit this year.', CURRENT_TIMESTAMP, 3, 3)
+INSERT INTO articles (title, content, publication_date, author_id, category_id) VALUES
+                                                                                        ('The Rise of AI', 'An in-depth look at artificial intelligence and its impact.', CURRENT_TIMESTAMP, 1, 1),
+                                                                                        ('Healthy Living Tips', 'Tips and tricks for a healthier lifestyle.', CURRENT_TIMESTAMP, 2, 2),
+                                                                                        ('Top 10 Travel Destinations', 'Explore the best places to visit this year.', CURRENT_TIMESTAMP, 3, 3)
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla detail_articles
