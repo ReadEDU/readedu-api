@@ -15,7 +15,7 @@ El propósito de ReadEDU es proporcionar una plataforma integrada que permita a 
 | Jeffry Paredes Cajo      | Miembro del Proyecto | [LinkedIn]          |
 | Joaquín Portella Pedemonte      | Miembro del Proyecto | [LinkedIn]          |
 
-### Revisa el Progreso del Proyecto BookHub
+### Revisa el Progreso del Proyecto ReadEDU
 
 | **Columna**       | **Descripción**                                                                                                                                    |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
