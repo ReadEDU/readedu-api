@@ -1,4 +1,3 @@
-
 -- Datos para la tabla readers
 INSERT INTO readers (first_name, last_name, fullname, created_at, updated_at) VALUES
                                                                                                ('Alice', 'Brown', 'Alice Brown', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -33,10 +32,10 @@ INSERT INTO subscriptions (price, duration, status, subscription_date, end_date,
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla articles
-INSERT INTO articles (title, content, publication_date, author_id, category_id) VALUES
-                                                                                        ('The Rise of AI', 'An in-depth look at artificial intelligence and its impact.', CURRENT_TIMESTAMP, 1, 1),
-                                                                                        ('Healthy Living Tips', 'Tips and tricks for a healthier lifestyle.', CURRENT_TIMESTAMP, 2, 2),
-                                                                                        ('Top 10 Travel Destinations', 'Explore the best places to visit this year.', CURRENT_TIMESTAMP, 3, 3)
+INSERT INTO articles (title, slug, content, publication_date, author_id, category_id, created_at, updated_at) VALUES
+                                                                                                                  ('The Rise of AI', 'the-rise-of-ai', 'An in-depth look at artificial intelligence and its impact.', CURRENT_TIMESTAMP, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                                                  ('Healthy Living Tips', 'healthy-living-tips', 'Tips and tricks for a healthier lifestyle.', CURRENT_TIMESTAMP, 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                                                  ('Top 10 Travel Destinations', 'top-10-travel-destinations', 'Explore the best places to visit this year.', CURRENT_TIMESTAMP, 3, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla detail_articles
