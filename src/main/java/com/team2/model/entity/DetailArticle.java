@@ -1,5 +1,6 @@
 package com.team2.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,5 +23,6 @@ public class DetailArticle {
 
     @ManyToOne
     @JoinColumn(name = "article_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_detail_article"))
+    @JsonBackReference
     private Article article;
 }
