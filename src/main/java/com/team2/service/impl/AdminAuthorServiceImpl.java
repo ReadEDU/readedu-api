@@ -1,5 +1,9 @@
 package com.team2.service.impl;
 
+import com.team2.dto.author.AuthorDTO;
+import com.team2.exception.BadRequestException;
+import com.team2.exception.ResourceNotFoundException;
+import com.team2.mapper.AuthorMapper;
 import com.team2.model.entity.Author;
 import com.team2.repository.AuthorRepository;
 import com.team2.service.AdminAuthorService;
@@ -16,48 +20,73 @@ import java.util.List;
 @Service
 public class AdminAuthorServiceImpl implements AdminAuthorService {
     private final AuthorRepository authorRepository;
+    private final AuthorMapper authorMapper;
 
     @Transactional(readOnly = true)
     @Override
-    public List<Author> getAll() {
-        return authorRepository.findAll();
+    public List<AuthorDTO> getAll() {
+        List<Author> authors = authorRepository.findAll();
+        return authors.stream()
+                .map(authorMapper::toDTO)
+                .toList();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Author> paginate(Pageable pageable) {
-        return authorRepository.findAll(pageable);
+    public Page<AuthorDTO> paginate(Pageable pageable) {
+        Page<Author> authors = authorRepository.findAll(pageable);
+        return authors.map(authorMapper::toDTO);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Author findById(Integer id) {
-        return authorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Author not found!"));
+    public AuthorDTO findById(Integer id) {
+        Author author = authorRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("El autor con ID "+id+" no fue encontrado"));
+        return authorMapper.toDTO(author);
     }
 
     @Transactional
     @Override
-    public Author create(Author author) {
+    public AuthorDTO create(AuthorDTO authorDTO) {
+        authorRepository.findByFirstNameAndLastName(authorDTO.getFirstName(), authorDTO.getLastName())
+                        .ifPresent(existingAuthor -> {
+                            throw new BadRequestException("El autor ya existe con el mismo nombre y apellido");
+                        });
+
+        Author author = authorMapper.toEntity(authorDTO);
         author.setCreatedAt(LocalDateTime.now());
-        return authorRepository.save(author);
+        author = authorRepository.save(author);
+        return authorMapper.toDTO(author);
     }
 
     @Transactional
     @Override
-    public Author update(Integer id, Author updateAuthor) {
-        Author authorFromDb = findById(id);
-        authorFromDb.setFirstName(updateAuthor.getFirstName());
-        authorFromDb.setLastName(updateAuthor.getLastName());
-        authorFromDb.setProfile(updateAuthor.getProfile());
+    public AuthorDTO update(Integer id, AuthorDTO updateAuthorDTO) {
+        Author authorFromDb = authorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("El autor con ID " + id + " no fue encontrado"));
+
+        authorRepository.findByFirstNameAndLastName(updateAuthorDTO.getFirstName(), updateAuthorDTO.getLastName())
+                .filter(existingAuthor -> !existingAuthor.getId().equals(id))
+                .ifPresent(existingAuthor -> {
+                    throw new BadRequestException("Ya existe un autor con el mismo nombre y apellido");
+                });
+
+        // Actualizar los campos
+        authorFromDb.setFirstName(updateAuthorDTO.getFirstName());
+        authorFromDb.setLastName(updateAuthorDTO.getLastName());
+        authorFromDb.setProfile(updateAuthorDTO.getProfile());
         authorFromDb.setUpdatedAt(LocalDateTime.now());
-        return authorRepository.save(authorFromDb);
+
+        authorFromDb = authorRepository.save(authorFromDb);
+        return authorMapper.toDTO(authorFromDb);
     }
 
     @Transactional
     @Override
     public void delete(Integer id) {
-        Author author = findById(id);
+        Author author = authorRepository.findById(id)
+                        .orElseThrow(()-> new ResourceNotFoundException("El autor con ID " + id + " no fue encontrado"));
         authorRepository.delete(author);
     }
 }

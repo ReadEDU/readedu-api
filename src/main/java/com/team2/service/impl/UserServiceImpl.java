@@ -3,7 +3,7 @@ package com.team2.service.impl;
 import com.team2.dto.user.CreateUserDTO;
 import com.team2.dto.user.UpdateUserDTO;
 import com.team2.dto.user.UserDTO;
-import com.team2.exception.ResourceNotExistsException;
+import com.team2.exception.ResourceNotFoundException;
 import com.team2.mapper.UserMapper;
 import com.team2.model.entity.User;
 import com.team2.repository.AuthorRepository;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getUser(Integer id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotExistsException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
         return userMapper.toUserDTO(user);
     }
 
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO updateUser(UpdateUserDTO userDTO) {
         User user = userRepository.findById(userDTO.getId())
-                .orElseThrow(() -> new ResourceNotExistsException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         boolean existsAsReader = readerRepository.existsByFirstNameAndLastNameAndUserIdNot(
                 userDTO.getFirstName(), userDTO.getLastName(), userDTO.getId());
