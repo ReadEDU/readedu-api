@@ -30,7 +30,7 @@ public class AdminArticleController {
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<Article> create(@RequestBody Article article){
         Article createdArticle = adminArticleService.create(article);
         return new ResponseEntity<>(createdArticle, HttpStatus.CREATED);
