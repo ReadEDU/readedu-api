@@ -18,7 +18,7 @@ import java.util.List;
 public class AdminArticleController {
     private final AdminArticleService adminArticleService;
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<Article>> list(){
         List<Article> articles = adminArticleService.findAll();
         return new ResponseEntity<>(articles, HttpStatus.OK);
@@ -30,7 +30,7 @@ public class AdminArticleController {
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<Article> create(@RequestBody Article article){
         Article createdArticle = adminArticleService.create(article);
         return new ResponseEntity<>(createdArticle, HttpStatus.CREATED);
