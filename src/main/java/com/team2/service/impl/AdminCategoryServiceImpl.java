@@ -30,7 +30,7 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
     public List<CategoryDTO> getAll() {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream()
-                .map(categoryMapper::toDto)
+                .map(categoryMapper::toDto) // Convierte cada categoría a DTO
                 .toList();
     }
 
