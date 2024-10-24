@@ -1,10 +1,8 @@
 package com.team2.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
@@ -23,8 +21,8 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "publication_date")
-    private LocalDateTime publicationDate;
+    @Column(name = "file_path")
+    private String filePath;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -40,11 +38,4 @@ public class Article {
     @JoinColumn(name = "category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_article_category"))
     private Category category;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<DetailArticle> detailArticles;
-
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Comment> comments;
 }
