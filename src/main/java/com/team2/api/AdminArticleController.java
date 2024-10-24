@@ -1,7 +1,9 @@
 package com.team2.api;
 
-import com.team2.model.entity.Article;
+import com.team2.dto.article.ArticleCreateUpdateDTO;
+import com.team2.dto.article.ArticleDetailsDTO;
 import com.team2.service.AdminArticleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,34 +20,35 @@ import java.util.List;
 public class AdminArticleController {
     private final AdminArticleService adminArticleService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Article>> list(){
-        List<Article> articles = adminArticleService.findAll();
+    @GetMapping
+    public ResponseEntity<List<ArticleDetailsDTO>> list(){
+        List<ArticleDetailsDTO> articles = adminArticleService.findAll();
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
     @GetMapping("/page")
-    public ResponseEntity<Page<Article>> paginate(@PageableDefault(size = 5, sort = "title") Pageable pageable){
-        Page<Article> page = adminArticleService.paginate(pageable);
+    public ResponseEntity<Page<ArticleDetailsDTO>> paginate(
+            @PageableDefault(size = 5, sort = "title") Pageable pageable){
+        Page<ArticleDetailsDTO> page = adminArticleService.paginate(pageable);
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Article> create(@RequestBody Article article){
-        Article createdArticle = adminArticleService.create(article);
+    @PostMapping
+    public ResponseEntity<ArticleDetailsDTO> create(@Valid @RequestBody ArticleCreateUpdateDTO articleFormDTO) {
+        ArticleDetailsDTO createdArticle = adminArticleService.create(articleFormDTO);
         return new ResponseEntity<>(createdArticle, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Article> get(@PathVariable Integer id){
-        Article article = adminArticleService.findById(id);
+    public ResponseEntity<ArticleDetailsDTO> get(@PathVariable Integer id){
+        ArticleDetailsDTO article = adminArticleService.findById(id);
         return new ResponseEntity<>(article, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Article> update(@PathVariable Integer id, @RequestBody Article article){
-        Article updatedArticle = adminArticleService.update(id, article);
-        return new ResponseEntity<>(updatedArticle, HttpStatus.OK);
+    public ResponseEntity<ArticleDetailsDTO> update(@PathVariable Integer id, @Valid @RequestBody ArticleCreateUpdateDTO articleFormDTO) {
+        ArticleDetailsDTO updateArticle = adminArticleService.update(id, articleFormDTO);
+        return new ResponseEntity<>(updateArticle, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

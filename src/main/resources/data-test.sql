@@ -32,16 +32,17 @@ INSERT INTO subscriptions (price, duration, status, subscription_date, end_date,
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla articles
-INSERT INTO articles (title, slug, content, author_id, category_id, created_at, updated_at) VALUES
-                                                                                                                  ('The Rise of AI', 'the-rise-of-ai', 'An in-depth look at artificial intelligence and its impact.', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                                                                                                                  ('Healthy Living Tips', 'healthy-living-tips', 'Tips and tricks for a healthier lifestyle.', 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                                                                                                                  ('Top 10 Travel Destinations', 'top-10-travel-destinations', 'Explore the best places to visit this year.', 3, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+INSERT INTO articles (title, slug, content, file_path, author_id, category_id, created_at, updated_at) VALUES
+                                                                                                               ('The Rise of AI', 'the-rise-of-ai', 'An in-depth look at artificial intelligence and its impact.', '/files/the-rise-of-ai.pdf', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                                               ('Healthy Living Tips', 'healthy-living-tips', 'Tips and tricks for a healthier lifestyle.', '/files/healthy-living-tips.pdf', 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                                                                               ('Top 10 Travel Destinations', 'top-10-travel-destinations', 'Explore the best places to visit this year.', '/files/top-10-travel-destinations.pdf', 3, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     ON CONFLICT DO NOTHING;
 
+
 -- Datos para la tabla favorites
-INSERT INTO favorites (name, reader_id, created_at, updated_at) VALUES
-                                                ('Favorite Articles', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-                                                ('My Reading List', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+INSERT INTO favorites (name, reader_id) VALUES
+                                                ('Favorite Articles', 1),
+                                                ('My Reading List', 2)
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla collection_articles
