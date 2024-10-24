@@ -8,6 +8,7 @@ public class ArticleDetailsDTO {
     private String title;
     private String slug;
     private String content;
-    private Integer categoryId;
-    private Integer authorId;
+    private String filePath;
+    private String categoryName;
+    private String authorName;
 }

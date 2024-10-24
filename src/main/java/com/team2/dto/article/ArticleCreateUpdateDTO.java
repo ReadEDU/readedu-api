@@ -9,7 +9,7 @@ import lombok.Data;
 public class ArticleCreateUpdateDTO {
     private Integer id;
 
-    @NotBlank(message = "El titulo es obligatorio")
+    @NotBlank(message = "El título es obligatorio")
     @Size(max = 255, message = "El título debe tener 255 caracteres o menos")
     private String title;
 
@@ -17,10 +17,12 @@ public class ArticleCreateUpdateDTO {
     @Size(max = 255, message = "El slug debe tener 255 caracteres o menos")
     private String slug;
 
-    @NotBlank(message = "El contenido de la descripción es obligatoria")
+    @NotBlank(message = "La descripción es obligatoria")
     private String content;
 
-    @NotNull(message ="La categoriá es obligatoria")
+    private String filePath;
+
+    @NotNull(message = "La categoría es obligatoria")
     private Integer categoryId;
 
     @NotNull(message = "El autor es obligatorio")

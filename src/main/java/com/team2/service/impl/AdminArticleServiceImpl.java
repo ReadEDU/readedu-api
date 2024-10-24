@@ -1,5 +1,10 @@
 package com.team2.service.impl;
 
+import com.team2.dto.article.ArticleCreateUpdateDTO;
+import com.team2.dto.article.ArticleDetailsDTO;
+import com.team2.exception.BadRequestException;
+import com.team2.exception.ResourceNotFoundException;
+import com.team2.mapper.ArticleMapper;
 import com.team2.model.entity.Article;
 import com.team2.model.entity.Author;
 import com.team2.model.entity.Category;
@@ -22,59 +27,86 @@ public class AdminArticleServiceImpl implements AdminArticleService {
     private final ArticleRepository articleRepository;
     private final CategoryRepository categoryRepository;
     private final AuthorRepository authorRepository;
+    private final ArticleMapper articleMapper;
 
     @Transactional(readOnly = true)
     @Override
-    public List<Article> findAll() {
-        return articleRepository.findAll();
+    public List<ArticleDetailsDTO> findAll() {
+        List<Article> articles = articleRepository.findAll();
+        return articles.stream()
+            .map(articleMapper::toDetailsDTO)
+            .toList();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Article> paginate(Pageable pageable) {
-        return articleRepository.findAll(pageable);
+    public Page<ArticleDetailsDTO> paginate(Pageable pageable) {
+        return articleRepository.findAll(pageable)
+                .map(articleMapper::toDetailsDTO);
     }
 
+    @Transactional
     @Override
-    public Article create(Article article) {
-        Category category = categoryRepository.findById(article.getCategory().getId())
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + article.getCategory().getId()));
-        Author author = authorRepository.findById(article.getAuthor().getId())
-                .orElseThrow(() -> new RuntimeException("Author not found with id: " + article.getAuthor().getId()));
+    public ArticleDetailsDTO create(ArticleCreateUpdateDTO articleCreateUpdateDTO) {
+        articleRepository.findByTitleOrSlug(articleCreateUpdateDTO.getTitle(), articleCreateUpdateDTO.getSlug())
+                .ifPresent(article -> {
+                    throw new BadRequestException("Ya existe un articulo con el mismo titulo o slug");
+                });
+
+        // Asigna la categoria y el autor antes de guardar
+        Category category = categoryRepository.findById(articleCreateUpdateDTO.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + articleCreateUpdateDTO.getCategoryId()));
+        Author author = authorRepository.findById(articleCreateUpdateDTO.getAuthorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Author not found with id: " + articleCreateUpdateDTO.getAuthorId()));
+
+        Article article = articleMapper.toEntity(articleCreateUpdateDTO);
 
         article.setCategory(category);
         article.setAuthor(author);
         article.setCreatedAt(LocalDateTime.now());
 
-        return articleRepository.save(article);
+        return articleMapper.toDetailsDTO(articleRepository.save(article));
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Article findById(Integer id) {
-        return articleRepository.findById(id).orElseThrow(() -> new RuntimeException("Article not found with id: " + id));
+    public ArticleDetailsDTO findById(Integer id) {
+        Article article = articleRepository.findById(id).
+                orElseThrow(() -> new ResourceNotFoundException("Article not found with id: " + id));
+        return articleMapper.toDetailsDTO(article);
     }
 
     @Transactional
     @Override
-    public Article update(Integer id, Article updateArticle) {
-        Article articleFromDb = findById(id);
+    public ArticleDetailsDTO update(Integer id,ArticleCreateUpdateDTO updateArticle) {
+        Article articleFromDb = articleRepository.findById(id).
+                    orElseThrow(() -> new ResourceNotFoundException("Article not found with id: " + id));
 
-        Category category = categoryRepository.findById(updateArticle.getCategory().getId())
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + updateArticle.getCategory().getId()));
-        Author author = authorRepository.findById(updateArticle.getAuthor().getId())
-                .orElseThrow(() -> new RuntimeException("Author not found with id: " + updateArticle.getAuthor().getId()));
+        articleRepository.findByTitleOrSlug(updateArticle.getTitle(), updateArticle.getSlug())
+                .ifPresent(article -> {
+                    throw new BadRequestException("Ya existe un articulo con el mismo titulo o slug");
+                });
+
+        // Asigna la categoría y el autor antes de actualizar
+        Category category = categoryRepository.findById(updateArticle.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + updateArticle.getCategoryId()));
+        Author author = authorRepository.findById(updateArticle.getAuthorId())
+                .orElseThrow(() -> new RuntimeException("Author not found with id: " + updateArticle.getAuthorId()));
+
+        //Actualización de los campos del Articulo
+        //article = articleMapper.toEntity(updateArticle);
+
 
         articleFromDb.setTitle(updateArticle.getTitle());
-        articleFromDb.setSlug(updateArticle.getSlug());
         articleFromDb.setContent(updateArticle.getContent());
-        articleFromDb.setPublicationDate(updateArticle.getPublicationDate());
+        articleFromDb.setSlug(updateArticle.getSlug());
+        articleFromDb.setFilePath(updateArticle.getFilePath());
 
         articleFromDb.setCategory(category);
         articleFromDb.setAuthor(author);
         articleFromDb.setUpdatedAt(LocalDateTime.now());
 
-        return articleRepository.save(articleFromDb);
+        return articleMapper.toDetailsDTO(articleRepository.save(articleFromDb));
     }
 
     @Transactional
