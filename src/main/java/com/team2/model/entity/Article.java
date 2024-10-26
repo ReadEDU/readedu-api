@@ -23,9 +23,6 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "publication_date")
-    private LocalDateTime publicationDate;
-
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
@@ -42,9 +39,6 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<DetailArticle> detailArticles;
-
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Comment> comments;
+
 }
