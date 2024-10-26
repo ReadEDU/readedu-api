@@ -1,8 +1,10 @@
 package com.team2.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,10 +18,17 @@ public class Favorite {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
     @ManyToOne
     @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_favorite_reader"))
     private Reader reader;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)
     private List<CollectionArticle> collectionArticles;
 }
