@@ -40,9 +40,9 @@ INSERT INTO articles (title, slug, content, file_path, author_id, category_id, c
 
 
 -- Datos para la tabla favorites
-INSERT INTO favorites (name, reader_id) VALUES
-                                                ('Favorite Articles', 1),
-                                                ('My Reading List', 2)
+INSERT INTO favorites (name, reader_id, created_at, updated_at) VALUES
+                                                ('Favorite Articles', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+                                                ('My Reading List', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla collection_articles
