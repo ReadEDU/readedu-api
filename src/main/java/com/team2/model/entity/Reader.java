@@ -18,7 +18,7 @@ public class Reader {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "fullname")
+    @Column(name = "full_name")
     private String fullname;
 
     @Column(name = "created_at", nullable = false)
