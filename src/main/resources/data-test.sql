@@ -1,8 +1,8 @@
 -- Datos para la tabla readers
 INSERT INTO readers (first_name, last_name, full_name, email, password, created_at, updated_at, erole) VALUES
-                                                                                               ('Alice', 'Brown', 'Alice Brown', 'alice.brown@example.com', 'password123',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'AUTHOR'),
-                                                                                               ('Bob', 'Green', 'Bob Green', 'bob.green@example.com', 'password123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'READER'),
-                                                                                               ('Charlie', 'Black', 'Charlie Black', 'charlie.black@example.com', 'password123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'AUTHOR')
+                                                                                               ('Alice', 'Brown', 'Alice Brown', 'alice.brown@example.com', 'password123',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'USER'),
+                                                                                               ('Bob', 'Green', 'Bob Green', 'bob.green@example.com', 'password123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'ADMIN'),
+                                                                                               ('Charlie', 'Black', 'Charlie Black', 'charlie.black@example.com', 'password123', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'USER')
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla authors
