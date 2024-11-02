@@ -53,10 +53,10 @@ INSERT INTO collection_articles (favorite_id, article_id, added_date) VALUES
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla comments
-INSERT INTO comments (content, date, author, reader_id, article_id) VALUES
-                                                                            ('Great article!', CURRENT_TIMESTAMP, 'Alice', 1, 1),
-                                                                            ('Very informative, thanks!', CURRENT_TIMESTAMP, 'Bob', 2, 2),
-                                                                            ('I love these suggestions!', CURRENT_TIMESTAMP, 'Charlie', 3, 3)
+INSERT INTO comments (content, created_at, article_id) VALUES
+                                                           ('Great article!', CURRENT_TIMESTAMP, 1),
+                                                           ('Very informative, thanks!', CURRENT_TIMESTAMP, 2),
+                                                           ('I love these suggestions!', CURRENT_TIMESTAMP, 3)
     ON CONFLICT DO NOTHING;
 
 -- Datos para la tabla notifications

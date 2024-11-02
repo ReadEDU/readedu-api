@@ -30,4 +30,5 @@ public class Reader {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
 }
