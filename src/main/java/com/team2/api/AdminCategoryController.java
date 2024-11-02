@@ -1,6 +1,6 @@
 package com.team2.api;
 
-import com.team2.dto.CategoryDTO;
+import com.team2.dto.category.CategoryDTO;
 import com.team2.service.AdminCategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

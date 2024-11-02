@@ -15,5 +15,5 @@ public class Plan {
     private String type;
 
     @Column(name = "price")
-    private Double price;
+    private Float price;
 }

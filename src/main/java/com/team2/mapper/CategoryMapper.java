@@ -1,6 +1,6 @@
 package com.team2.mapper;
 
-import com.team2.dto.CategoryDTO;
+import com.team2.dto.category.CategoryDTO;
 import com.team2.model.entity.Category;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
