@@ -1,7 +1,7 @@
 package com.team2.service.impl;
 
 
-import com.team2.dto.CategoryDTO;
+import com.team2.dto.category.CategoryDTO;
 import com.team2.exception.BadRequestException;
 import com.team2.exception.ResourceNotFoundException;
 import com.team2.mapper.CategoryMapper;
@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.team2.service;
 
 
-import com.team2.dto.CategoryDTO;
+import com.team2.dto.category.CategoryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

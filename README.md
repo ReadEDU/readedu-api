@@ -10,10 +10,7 @@ El propósito de ReadEDU es proporcionar una plataforma integrada que permita a 
 | **Nombre**                        | **Rol**                                     | **Perfil**                                                 |
 |-----------------------------------|---------------------------------------------|------------------------------------------------------------|
 | Gustavo Alexander Cruz León      | Líder del Proyecto | [LinkedIn]          |
-| Piero Gadiel Aguirre del Castillo      | Miembro del Proyecto | [LinkedIn]          |
 | Samil Grados Araujo      | Miembro del Proyecto | [LinkedIn]          |
-| Jeffry Paredes Cajo      | Miembro del Proyecto | [LinkedIn]          |
-| Joaquín Portella Pedemonte      | Miembro del Proyecto | [LinkedIn]          |
 
 ### Revisa el Progreso del Proyecto ReadEDU
 
@@ -115,14 +112,14 @@ Este diagrama ilustra el esquema de la base de datos utilizada por la aplicació
 Enfocado en implementar las funcionalidades esenciales de CRUD para la gestión de categorías, libros, autores, usuarios y el flujo inicial de compras, asegurando que el producto esté listo para un uso básico.
 
 | Integrante | Módulo                | Historia de Usuario                                            | Descripción                                                                                                                                       | Tipo   |
-|------------|-----------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| Gustavo	   | Gestión de Categorías | Historia de Usuario 1: Crear categorías                        | Como administrador, quiero poder crear, leer, actualizar y eliminar categorías para mantener organizada la colección de articulos.                | CRUD   |
-|            | Gestión de Articulos  | Historia de Usuario 2: Crear articulos                         | Como administrador, quiero poder crear, leer, actualizar y eliminar articulos para mantener actualizada la oferta disponible.                     | CRUD   |
-| Samil	     | Gestión de Autores    | Historia de Usuario 3: Crear autores                           | Como administrador, quiero poder crear, leer, actualizar y eliminar información de autores para mantener actualizada la base de datos de autores. | CRUD   |
-| 		         | Gestión de Usuarios   | Historia de Usuario 4: Registrar usuarios                      | Como usuario, quiero poder registrarme en la plataforma para acceder a las funcionalidades disponibles.                                           | CRUD   |
-| Joaquin		  | Gestión de Usuarios   | Historia de Usuario 5: Actualizar información personal         | Como usuario, quiero poder actualizar mi información personal para mantener mis datos al día en la plataforma.                                    | CRUD   |
-|            | Gestión de Usuarios   | Historia de Usuario 6: Ver detalles de mi perfil               | Como usuario, quiero poder ver todos los detalles de mi perfil para revisar mi información y actividad.                                           | CRUD   |
-| Piero		    | Gestión de Compras    | Historia de Usuario 7: Flujo inicial de compra                 | Como usuario, quiero seleccionar artículos para comprarlos, simulando el flujo de compra inicial antes de integrar métodos de pago.                      | Core   |
-| 		         | Gestión de Colección  | Historia de Usuario 8: Añadir articulos a la colección         | Como usuario, quiero añadir artículos a mi colección personal para organizar mis favoritos.                                         | Core   |
-| Jeffry	    | Gestión de Colección  | Historia de Usuario 9: Eliminar articulos de la colección      | Como usuario, quiero poder eliminar artículos de mi colección cuando ya no los necesite.                                                    | Core   |
-|            | Gestión de Colección  | Historia de Usuario 10: Ver lista de articulos en la colección | Como usuario, quiero ver la lista completa de artículos en mi colección para gestionar mis favoritos.                                                | CRUD   |
+|---|-----------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| Gustavo	 | Gestión de Categorías | Historia de Usuario 1: Crear categorías                        | Como administrador, quiero poder crear, leer, actualizar y eliminar categorías para mantener organizada la colección de articulos.                | CRUD   |
+|   | Gestión de Articulos  | Historia de Usuario 2: Crear articulos                         | Como administrador, quiero poder crear, leer, actualizar y eliminar articulos para mantener actualizada la oferta disponible.                     | CRUD   |
+| Samil	 | Gestión de Autores    | Historia de Usuario 3: Crear autores                           | Como administrador, quiero poder crear, leer, actualizar y eliminar información de autores para mantener actualizada la base de datos de autores. | CRUD   |
+| 		 | Gestión de Usuarios   | Historia de Usuario 4: Registrar usuarios                      | Como usuario, quiero poder registrarme en la plataforma para acceder a las funcionalidades disponibles.                                           | CRUD   |
+| 		 | Gestión de Usuarios   | Historia de Usuario 5: Actualizar información personal         | Como usuario, quiero poder actualizar mi información personal para mantener mis datos al día en la plataforma.                                    | CRUD   |
+|   | Gestión de Usuarios   | Historia de Usuario 6: Ver detalles de mi perfil               | Como usuario, quiero poder ver todos los detalles de mi perfil para revisar mi información y actividad.                                           | CRUD   |
+| 	 | Gestión de Compras    | Historia de Usuario 7: Flujo inicial de compra                 | Como usuario, quiero seleccionar artículos para comprarlos, simulando el flujo de compra inicial antes de integrar métodos de pago.                      | Core   |
+| 		 | Gestión de Colección  | Historia de Usuario 8: Añadir articulos a la colección         | Como usuario, quiero añadir artículos a mi colección personal para organizar mis favoritos.                                         | Core   |
+| 	 | Gestión de Colección  | Historia de Usuario 9: Eliminar articulos de la colección      | Como usuario, quiero poder eliminar artículos de mi colección cuando ya no los necesite.                                                    | Core   |
+|   | Gestión de Colección  | Historia de Usuario 10: Ver lista de articulos en la colección | Como usuario, quiero ver la lista completa de artículos en mi colección para gestionar mis favoritos.                                                | CRUD   |

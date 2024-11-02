@@ -1,4 +1,4 @@
-package com.team2.dto;
+package com.team2.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
