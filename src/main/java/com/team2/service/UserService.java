@@ -1,7 +1,16 @@
 package com.team2.service;
 
-import com.team2.model.entity.User;
+import com.team2.dto.user.UserProfileDTO;
+import com.team2.dto.user.UserRegistrationDTO;
 
 public interface UserService {
-    User registerUser(User user);
+
+    UserProfileDTO registerReader(UserRegistrationDTO registrationDTO);
+
+    UserProfileDTO registerCreator(UserRegistrationDTO registrationDTO);
+
+    UserProfileDTO updateUserProfile(Integer id, UserProfileDTO userProfileDTO);
+
+    UserProfileDTO getUserProfileById(Integer id);
+
 }

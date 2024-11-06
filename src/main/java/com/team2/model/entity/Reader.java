@@ -12,14 +12,14 @@ public class Reader {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "full_name")
-    private String fullname;
+    @Column(name = "biography", columnDefinition = "TEXT")
+    private String biography;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

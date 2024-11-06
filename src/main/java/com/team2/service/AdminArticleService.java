@@ -2,7 +2,6 @@ package com.team2.service;
 
 import com.team2.dto.article.ArticleCreateUpdateDTO;
 import com.team2.dto.article.ArticleDetailsDTO;
-import com.team2.model.entity.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

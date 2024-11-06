@@ -1,9 +1,9 @@
 package com.team2.model.entity;
 
+import com.team2.model.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import com.team2.model.enums.PaymentStatus;
 
 @Data
 @Entity

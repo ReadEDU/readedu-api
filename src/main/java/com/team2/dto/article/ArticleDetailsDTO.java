@@ -10,5 +10,5 @@ public class ArticleDetailsDTO {
     private String content;
     private String filePath;
     private String categoryName;
-    private String authorName;
+    private String creatorName;
 }

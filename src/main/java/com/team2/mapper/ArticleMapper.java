@@ -20,7 +20,7 @@ public class ArticleMapper {
     public ArticleDetailsDTO toDetailsDTO(Article article) {
            ArticleDetailsDTO articleDetailsDTO = modelMapper.map(article, ArticleDetailsDTO.class);
 
-           articleDetailsDTO.setAuthorName(article.getAuthor().getFirstName()+" "+article.getAuthor().getLastName());
+           articleDetailsDTO.setCreatorName(article.getCreator().getFirstName()+" "+article.getCreator().getLastName());
            articleDetailsDTO.setCategoryName(article.getCategory().getName());
 
            return articleDetailsDTO;
@@ -30,9 +30,8 @@ public class ArticleMapper {
         return modelMapper.map(articleCreateUpdateDTO, Article.class);
     }
 
-    public ArticleCreateUpdateDTO toCreateDTO(Article article) {
+    public ArticleCreateUpdateDTO toCreateUpdateDTO(Article article) {
         return modelMapper.map(article, ArticleCreateUpdateDTO.class);
     }
-
 
 }

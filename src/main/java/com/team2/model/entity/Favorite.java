@@ -25,8 +25,8 @@ public class Favorite {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_favorite_reader"))
-    private Reader reader;
+    @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_favorite_users"))
+    private User reader;
 
     @JsonIgnore
     @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)

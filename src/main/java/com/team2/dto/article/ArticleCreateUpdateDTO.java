@@ -25,6 +25,6 @@ public class ArticleCreateUpdateDTO {
     @NotNull(message = "La categoría es obligatoria")
     private Integer categoryId;
 
-    @NotNull(message = "El autor es obligatorio")
-    private Integer authorId;
+    @NotNull(message = "El creador es obligatorio")
+    private Integer creatorId;
 }
