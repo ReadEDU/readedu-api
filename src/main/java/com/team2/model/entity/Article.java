@@ -31,11 +31,11 @@ public class Article {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_article_author"))
-    private Author author;
+    @JoinColumn(name = "creator_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_article_creators"))
+    private Creator creator;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_article_category"))
+    @JoinColumn(name = "category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_article_categories"))
     private Category category;
 
 }

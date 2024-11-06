@@ -6,20 +6,20 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "authors")
-public class Author {
+@Table(name = "creators")
+public class Creator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "profile")
-    private String profile;
+    @Column(name = "biography", columnDefinition = "TEXT")
+    private String biography;
 
     @Column(name = "created_at",nullable = false)
     private LocalDateTime createdAt;

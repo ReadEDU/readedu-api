@@ -1,6 +1,5 @@
 package com.team2.exception;
 
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -42,11 +41,10 @@ import java.util.stream.Collectors;
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         String msg = ex.getBindingResult().getFieldErrors().stream()
-                .map(e -> e.getField().concat(": ").concat(e.getDefaultMessage()))
-                .collect(Collectors.joining(", "));
+                .map(e -> e.getField().concat(": ").concat(e.getDefaultMessage())
+                ).collect(Collectors.joining(", "));
 
         CustomErrorResponse err = new CustomErrorResponse(LocalDateTime.now(), msg, request.getDescription(false));
         return new ResponseEntity<>(err, HttpStatus.UNPROCESSABLE_ENTITY);
     }
-
 }
