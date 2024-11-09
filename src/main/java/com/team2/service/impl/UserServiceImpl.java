@@ -1,8 +1,9 @@
 package com.team2.service.impl;
 
+import com.team2.dto.user.AuthResponseDTO;
+import com.team2.dto.user.LoginDTO;
 import com.team2.dto.user.UserProfileDTO;
 import com.team2.dto.user.UserRegistrationDTO;
-import com.team2.exception.BadRequestException;
 import com.team2.exception.ResourceNotFoundException;
 import com.team2.mapper.UserMapper;
 import com.team2.model.entity.Creator;
@@ -14,8 +15,13 @@ import com.team2.repository.CreatorRepository;
 import com.team2.repository.ReaderRepository;
 import com.team2.repository.RoleRepository;
 import com.team2.repository.UserRepository;
+import com.team2.security.TokenProvider;
+import com.team2.security.UserPrincipal;
 import com.team2.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +38,9 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
+    private final AuthenticationManager authenticationManager;
+    private final TokenProvider tokenProvider;
+
     @Transactional
     @Override
     public UserProfileDTO registerReader(UserRegistrationDTO registrationDTO) {
@@ -44,6 +53,22 @@ public class UserServiceImpl implements UserService {
         return registerUserWithRole(registrationDTO, ERole.CREATOR);
     }
 
+    @Override
+    public AuthResponseDTO login(LoginDTO loginDTO) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
+        );
+
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        User user = userPrincipal.getUser();
+
+        String token=tokenProvider.createAccessToken(authentication);
+
+        AuthResponseDTO responseDTO = userMapper.toAuthResponseDTO(user, token);
+
+        return responseDTO;
+    }
+
     @Transactional
     @Override
     public UserProfileDTO updateUserProfile(Integer id, UserProfileDTO userProfileDTO) {
@@ -52,12 +77,12 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         // Comprobamos si el nuevo perfil es igual al existente
-        boolean isSameFirstName = user.getReader() != null &&
-                user.getReader().getFirstName().equals(userProfileDTO.getFirstName());
-        boolean isSameLastName = user.getReader() != null &&
-                user.getReader().getLastName().equals(userProfileDTO.getLastName());
-        boolean isSameBiography = user.getReader() != null &&
-                user.getReader().getBiography().equals(userProfileDTO.getBiography());
+        boolean isSameFirstName = (user.getReader() != null && user.getReader().getFirstName().equals(userProfileDTO.getFirstName())) ||
+                (user.getCreator() != null && user.getCreator().getFirstName().equals(userProfileDTO.getFirstName()));
+        boolean isSameLastName = (user.getReader() != null && user.getReader().getLastName().equals(userProfileDTO.getLastName())) ||
+                (user.getCreator() != null && user.getCreator().getLastName().equals(userProfileDTO.getLastName()));
+        boolean isSameBiography = (user.getReader() != null && user.getReader().getBiography().equals(userProfileDTO.getBiography())) ||
+                (user.getCreator() != null && user.getCreator().getBiography().equals(userProfileDTO.getBiography()));
 
         // Si todos los campos coinciden, lanzamos la excepción sin realizar cambios
         if (isSameFirstName && isSameLastName && isSameBiography) {
@@ -107,7 +132,6 @@ public class UserServiceImpl implements UserService {
 
         return userMapper.toUserProfileDTO(updatedUser);
     }
-
 
     @Transactional(readOnly = true)
     @Override

@@ -1,14 +1,19 @@
 package com.team2.config;
 
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 public class SwaggerAPIConfig {
@@ -40,9 +45,23 @@ public class SwaggerAPIConfig {
                 .termsOfService("https://github.com/ReadEDU/readedu-api")
                 .license(mitLicense);
 
+        // Configuración de seguridad JWT
+        SecurityScheme securityScheme = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT")
+                .name("JWT Authentication");
+
+        Components components = new Components()
+                .addSecuritySchemes("bearerAuth", securityScheme);
+
+        // Requerimiento de seguridad para utilizar en las operaciones
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
+
         return new OpenAPI()
                 .info(info)
-                .addServersItem(devServer);
-
+                .servers(List.of(devServer))
+                .addSecurityItem(securityRequirement)
+                .components(components);
     }
 }
