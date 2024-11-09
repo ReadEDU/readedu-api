@@ -81,3 +81,13 @@ INSERT INTO notifications (type, message, publication_date, reader_id) VALUES
                                                                            ('INFO', 'Welcome to the platform!', CURRENT_TIMESTAMP, 1),
                                                                            ('REMINDER', 'Your subscription will expire soon.', CURRENT_TIMESTAMP, 2)
     ON CONFLICT DO NOTHING;
+
+-- Datos para la tabla donations
+INSERT INTO donations (amount, created_at, user_id) VALUES
+                                                        (50.0, CURRENT_TIMESTAMP, 4),
+                                                        (100.5, CURRENT_TIMESTAMP, 5),
+                                                        (75.25, CURRENT_TIMESTAMP, 6),
+                                                        (20.0, CURRENT_TIMESTAMP, 1),
+                                                        (30.75, CURRENT_TIMESTAMP, 2),
+                                                        (45.0, CURRENT_TIMESTAMP, 3)
+    ON CONFLICT DO NOTHING;
