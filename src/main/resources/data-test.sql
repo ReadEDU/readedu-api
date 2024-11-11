@@ -42,12 +42,6 @@ INSERT INTO plans (type, price) VALUES
                                     ('Premium', 29.99)
     ON CONFLICT DO NOTHING;
 
--- Datos para la tabla subscriptions
-INSERT INTO subscriptions (price, duration, status, subscription_date, end_date, payment_status, plan_id, reader_id) VALUES
-                                                                                                                         ('9.99', '1 Month', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '1 MONTH', 'PAID', 1, 1),
-                                                                                                                         ('29.99', '3 Months', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '3 MONTHS', 'PAID', 2, 2)
-    ON CONFLICT DO NOTHING;
-
 -- Datos para la tabla articles
 INSERT INTO articles (title, slug, content, file_path, creator_id, category_id, created_at, updated_at) VALUES
                                                                                                             ('The Rise of AI', 'the-rise-of-ai', 'An in-depth look at artificial intelligence and its impact.', '/files/the-rise-of-ai.pdf', 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -90,4 +84,13 @@ INSERT INTO donations (amount, created_at, user_id) VALUES
                                                         (20.0, CURRENT_TIMESTAMP, 1),
                                                         (30.75, CURRENT_TIMESTAMP, 2),
                                                         (45.0, CURRENT_TIMESTAMP, 3)
+    ON CONFLICT DO NOTHING;
+-- Datos para la tabla purchases
+INSERT INTO purchases (total, payment_status, created_at, updated_at, user_id, donation_id) VALUES
+                                                                                                (150.0, 'PAID', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1),
+                                                                                                (200.5, 'PENDING', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 2),
+                                                                                                (75.75, 'FAILED', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3, 3),
+                                                                                                (120.0, 'PAID', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 4, 4),
+                                                                                                (80.0, 'PENDING', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5, 5),
+                                                                                                (50.0, 'PAID', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 6, 6)
     ON CONFLICT DO NOTHING;
