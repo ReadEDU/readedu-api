@@ -2,6 +2,7 @@ package com.team2.api;
 
 import com.team2.dto.donation.DonationCreateDTO;
 import com.team2.dto.donation.DonationDetailsDTO;
+import com.team2.dto.donation.DonationTotalDTO;
 import com.team2.service.DonationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,11 +38,12 @@ public class DonationController {
     }
 
     @GetMapping("/total/{creatorId}")
-    public ResponseEntity<Float> getDonationAmount(@PathVariable Integer creatorId) {
+    public ResponseEntity<DonationTotalDTO> getDonationAmount(@PathVariable Integer creatorId) {
         Float totalDonations = donationService.getTotalDonationsByUserId(creatorId);
         if (totalDonations == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(totalDonations);
+        DonationTotalDTO donationTotalDTO = new DonationTotalDTO(totalDonations);
+        return ResponseEntity.ok(donationTotalDTO);
     }
 }

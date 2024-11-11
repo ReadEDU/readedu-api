@@ -7,6 +7,7 @@ import com.team2.exception.ResourceNotFoundException;
 import com.team2.mapper.DonationMapper;
 import com.team2.model.entity.Donation;
 import com.team2.model.entity.User;
+import com.team2.model.enums.PaymentStatus;
 import com.team2.repository.DonationRepository;
 import com.team2.repository.UserRepository;
 import com.team2.service.DonationService;
@@ -39,6 +40,7 @@ public class DonationServiceImpl implements DonationService {
         donation.setAmount(donationCreateDTO.getAmount());
         donation.setCreated_at(LocalDateTime.now());
         donation.setUser(user);
+        donation.setPayment_status(PaymentStatus.PENDING);
 
         return donationMapper.toDetailsDTO(donationRepository.save(donation));
     }
@@ -55,6 +57,10 @@ public class DonationServiceImpl implements DonationService {
         if (user.getCreator() == null) {
             throw new InvalidOperationException("Solo los creadores pueden visualizar su lista de donaciones");
         }
+
+        donations = donations.stream()
+                .filter(donation -> donation.getPayment_status() == PaymentStatus.PAID)
+                .toList();
 
         if (donations.isEmpty()) {
             throw new ResourceNotFoundException("No existen donaciones para el creador ID: " + creatorId);
