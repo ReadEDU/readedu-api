@@ -15,19 +15,19 @@ import java.util.List;
 
 public interface CollectionArticleRepository extends JpaRepository<CollectionArticle, CollectionArticlePK> {
 
-    @Transactional
     @Modifying
-    @Query(value="INSERT INTO collection_articles (article_id, favorite_id, added_date) " +
-            "VALUES (:articleId, :favoriteId, :addedDate)", nativeQuery = true)
-    void addArticleToFavorite(@Param("articleId") Integer articleId, @Param("favoriteId") Integer favoriteId,
-                                @Param("addedDate") LocalDateTime addedDate);
+    @Transactional
+    @Query(value = "INSERT INTO collection_articles (article_id, favorite_id, added_date) VALUES (:articleId, :favoriteId, :addedDate)", nativeQuery = true)
+    void addArticleToFavorite(@Param("articleId") Integer articleId, @Param("favoriteId") Integer favoriteId, @Param("addedDate") LocalDateTime addedDate);
 
-    @Transactional
     @Modifying
-    @Query(value = "DELETE FROM collection_articles WHERE article_id = :articleId AND favorite_id = :favoriteId",
-            nativeQuery = true)
-    void deleteByArticleAndFavorite(@Param("articleId") Integer articleId,@Param("favoriteId") Integer favoriteId);
+    @Transactional
+    @Query(value = "DELETE FROM collection_articles WHERE article_id = :articleId AND favorite_id = :favoriteId", nativeQuery = true)
+    void deleteByArticleAndFavorite(@Param("articleId") Integer articleId, @Param("favoriteId") Integer favoriteId);
 
     @Query("SELECT cb.article FROM CollectionArticle cb WHERE cb.favorite = :favorite")
-    List<Article> findArticlesByFavorite(Favorite favorite);
+    List<Article> findArticlesByFavorite(@Param("favorite") Favorite favorite);
+
+    @Query(value = "SELECT COUNT(*) > 0 FROM collection_articles WHERE article_id = :articleId AND favorite_id = :favoriteId", nativeQuery = true)
+    boolean existsByArticleAndFavorite(@Param("articleId") Integer articleId, @Param("favoriteId") Integer favoriteId);
 }

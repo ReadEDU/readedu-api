@@ -104,6 +104,12 @@ Este diagrama ilustra el esquema de la base de datos utilizada por la aplicació
 | repository  | Proporciona la interfaz para las operaciones CRUD y la interacción con la base de datos.      |
 | service     | Declara la lógica de negocio y las operaciones que se realizarán sobre las entidades.         |
 | service impl| Implementa la lógica de negocio definida en los servicios, utilizando los repositorios necesarios. |
+| config         | Contiene la configuración del proyecto, como seguridad, documentación y mapeos.                 |
+| dto            | Gestiona la transferencia de datos entre la API y otras capas.                                   |
+| exception      | Maneja excepciones personalizadas y la gestión de errores globales en la aplicación.             |
+| mapper         | Proporciona la conversión entre entidades y DTOs para optimizar la transferencia de datos.       |
+| integration    | Maneja la integración con servicios externos como notificaciones por correo electrónico, APIs de terceros, etc. |
+| security       | Gestiona la autenticación y autorización de usuarios, incluyendo la configuración de seguridad y los filtros. |
 
 # Asignación de Historias de Usuario
 
@@ -111,15 +117,14 @@ Este diagrama ilustra el esquema de la base de datos utilizada por la aplicació
 ### Sprint 1: Funcionalidades Básicas
 Enfocado en implementar las funcionalidades esenciales de CRUD para la gestión de categorías, libros, autores, usuarios y el flujo inicial de compras, asegurando que el producto esté listo para un uso básico.
 
-| Integrante | Módulo                | Historia de Usuario                                            | Descripción                                                                                                                                       | Tipo   |
-|---|-----------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| Gustavo	 | Gestión de Categorías | Historia de Usuario 1: Crear categorías                        | Como administrador, quiero poder crear, leer, actualizar y eliminar categorías para mantener organizada la colección de articulos.                | CRUD   |
-|   | Gestión de Articulos  | Historia de Usuario 2: Crear articulos                         | Como administrador, quiero poder crear, leer, actualizar y eliminar articulos para mantener actualizada la oferta disponible.                     | CRUD   |
-| Samil	 | Gestión de Autores    | Historia de Usuario 3: Crear autores                           | Como administrador, quiero poder crear, leer, actualizar y eliminar información de autores para mantener actualizada la base de datos de autores. | CRUD   |
-| 		 | Gestión de Usuarios   | Historia de Usuario 4: Registrar usuarios                      | Como usuario, quiero poder registrarme en la plataforma para acceder a las funcionalidades disponibles.                                           | CRUD   |
-| 		 | Gestión de Usuarios   | Historia de Usuario 5: Actualizar información personal         | Como usuario, quiero poder actualizar mi información personal para mantener mis datos al día en la plataforma.                                    | CRUD   |
-|   | Gestión de Usuarios   | Historia de Usuario 6: Ver detalles de mi perfil               | Como usuario, quiero poder ver todos los detalles de mi perfil para revisar mi información y actividad.                                           | CRUD   |
-| 	 | Gestión de Compras    | Historia de Usuario 7: Flujo inicial de compra                 | Como usuario, quiero seleccionar artículos para comprarlos, simulando el flujo de compra inicial antes de integrar métodos de pago.                      | Core   |
-| 		 | Gestión de Colección  | Historia de Usuario 8: Añadir articulos a la colección         | Como usuario, quiero añadir artículos a mi colección personal para organizar mis favoritos.                                         | Core   |
-| 	 | Gestión de Colección  | Historia de Usuario 9: Eliminar articulos de la colección      | Como usuario, quiero poder eliminar artículos de mi colección cuando ya no los necesite.                                                    | Core   |
-|   | Gestión de Colección  | Historia de Usuario 10: Ver lista de articulos en la colección | Como usuario, quiero ver la lista completa de artículos en mi colección para gestionar mis favoritos.                                                | CRUD   |
+| Integrante | Módulo                | Historia de Usuario                                           | Descripción                                                                                                                                       | Tipo   |
+|---|-----------------------|---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| Gustavo	 | Gestión de Categorías | Historia de Usuario 1: Crear categorías                       | Como administrador, quiero poder crear, leer, actualizar y eliminar categorías para mantener organizada la colección de articulos.                | CRUD   |
+| Gustavo | Gestión de Articulos  | Historia de Usuario 2: Crear articulos                        | Como creador de contenido, quiero poder crear, leer, actualizar y eliminar articulos para mantener actualizada la oferta disponible.              | CRUD   |
+| Samil	 | Gestión de Autores    | Historia de Usuario 3: Crear autores                          | Como administrador, quiero poder crear, leer, actualizar y eliminar información de autores para mantener actualizada la base de datos de autores. | CRUD   |
+| Samil	 | Gestión de Usuarios   | Historia de Usuario 4: Registrar usuarios                     | Como usuario, quiero poder registrarme en la plataforma para acceder a las funcionalidades disponibles.                                           | CRUD   |
+| 	Samil	 | Gestión de Usuarios   | Historia de Usuario 5: Actualizar información personal        | Como usuario, quiero poder actualizar mi información personal para mantener mis datos al día en la plataforma.                                    | CRUD   |
+| Samil  | Gestión de Usuarios   | Historia de Usuario 6: Ver detalles de mi perfil              | Como usuario, quiero poder ver todos los detalles de mi perfil para revisar mi información y actividad.                                           | CRUD   |
+| Gustavo	 | Gestión de Colección  | Historia de Usuario 7: Añadir articulos a la colección        | Como lector, quiero añadir artículos a mi colección personal para organizar mis favoritos.                                                        | Core   |
+| Gustavo	 | Gestión de Colección  | Historia de Usuario 8: Eliminar articulos de la colección     | Como lector, quiero poder eliminar artículos de mi colección cuando ya no los necesite.                                                           | Core   |
+| Gustavo | Gestión de Colección  | Historia de Usuario 9: Ver lista de articulos en la colección | Como lector, quiero ver la lista completa de artículos en mi colección para gestionar mis favoritos.                                              | CRUD   |

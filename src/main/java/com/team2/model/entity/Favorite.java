@@ -26,9 +26,9 @@ public class Favorite {
 
     @ManyToOne
     @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_favorite_users"))
-    private User reader;
+    private Reader reader;
 
-    @JsonIgnore
+    /*@JsonIgnore
     @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)
-    private List<CollectionArticle> collectionArticles;
+    private List<CollectionArticle> collectionArticles; */
 }
