@@ -1,6 +1,7 @@
 package com.team2.api;
 
-import com.team2.model.entity.Favorite;
+import com.team2.dto.favorite.FavoriteCreateUpdateDTO;
+import com.team2.dto.favorite.FavoriteDetailsDTO;
 import com.team2.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,31 +19,35 @@ public class FavoriteController {
 
     private final FavoriteService favoriteService;
 
+    // Crear un nuevo favorito
     @PostMapping
-    public ResponseEntity<Favorite> createFavorite(@RequestBody Favorite favorite) {
-        Favorite savedFavorite = favoriteService.createFavorite(favorite);
+    public ResponseEntity<FavoriteDetailsDTO> createFavorite(@RequestBody FavoriteCreateUpdateDTO favoriteDTO) {
+        FavoriteDetailsDTO savedFavorite = favoriteService.createFavorite(favoriteDTO);
         return new ResponseEntity<>(savedFavorite, HttpStatus.CREATED);
     }
 
+    // Obtener favoritos por usuario
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Favorite>> getFavoritesByUserId(@PathVariable Integer userId) {
-        List<Favorite> favorites = favoriteService.getFavoritesByUser(userId);
+    public ResponseEntity<List<FavoriteDetailsDTO>> getFavoritesByUser(@PathVariable Integer userId) {
+        List<FavoriteDetailsDTO> favorites = favoriteService.getFavoritesByUser(userId);
         return ResponseEntity.ok(favorites);
     }
 
+    // Obtener un favorito por ID
     @GetMapping("/{favoriteId}")
-    public ResponseEntity<Favorite> getFavoriteById(@PathVariable Integer favoriteId) {
-        Favorite favorite = favoriteService.getFavoriteById(favoriteId);
+    public ResponseEntity<FavoriteDetailsDTO> getFavoriteById(@PathVariable Integer favoriteId) {
+        FavoriteDetailsDTO favorite = favoriteService.getFavoriteById(favoriteId);
         return ResponseEntity.ok(favorite);
     }
 
+    // Actualizar un favorito existente
     @PutMapping("/{favoriteId}")
-    public ResponseEntity<Favorite> updateFavorite(@PathVariable Integer favoriteId,
-                                                       @RequestBody Favorite favorite) {
-        Favorite updateFavorite = favoriteService.updateFavorite(favoriteId, favorite);
-        return ResponseEntity.ok(updateFavorite);
+    public ResponseEntity<FavoriteDetailsDTO> updateFavorite(@PathVariable Integer favoriteId, @RequestBody FavoriteCreateUpdateDTO favoriteDTO) {
+        FavoriteDetailsDTO updatedFavorite = favoriteService.updateFavorite(favoriteId, favoriteDTO);
+        return ResponseEntity.ok(updatedFavorite);
     }
 
+    // Eliminar un favorito
     @DeleteMapping("/{favoriteId}")
     public ResponseEntity<Void> deleteFavorite(@PathVariable Integer favoriteId) {
         favoriteService.deleteFavorite(favoriteId);

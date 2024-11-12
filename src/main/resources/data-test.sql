@@ -70,12 +70,6 @@ INSERT INTO comments (content, created_at, article_id) VALUES
                                                            ('I love these suggestions!', CURRENT_TIMESTAMP, 3)
     ON CONFLICT DO NOTHING;
 
--- Datos para la tabla notifications
-INSERT INTO notifications (type, message, publication_date, reader_id) VALUES
-                                                                           ('INFO', 'Welcome to the platform!', CURRENT_TIMESTAMP, 1),
-                                                                           ('REMINDER', 'Your subscription will expire soon.', CURRENT_TIMESTAMP, 2)
-    ON CONFLICT DO NOTHING;
-
 -- Datos para la tabla donations
 INSERT INTO donations (amount, created_at, user_id) VALUES
                                                         (50.0, CURRENT_TIMESTAMP, 4),
