@@ -3,8 +3,8 @@ package com.team2.service.impl;
 
 import com.team2.exception.BadRequestException;
 import com.team2.model.entity.Article;
-import com.team2.model.entity.CollectionArticle;
 import com.team2.model.entity.Favorite;
+import com.team2.model.entity.CollectionArticle;
 import com.team2.repository.CollectionArticleRepository;
 import com.team2.repository.FavoriteRepository;
 import com.team2.service.CollectionArticleService;
@@ -20,23 +20,18 @@ import java.util.List;
 public class CollectionArticleServiceImpl implements CollectionArticleService {
 
     private final CollectionArticleRepository collectionArticleRepository;
-    private final FavoriteRepository favoriteRepository; // Asegúrate de tener acceso al repo de Collection
+    private final FavoriteRepository favoriteRepository;
 
     @Override
     @Transactional
     public CollectionArticle addArticleToFavorite(Integer articleId, Integer favoriteId) {
-        // Verificar si el libro ya está en la colección
-        if (collectionArticleRepository.existsByArticleAndFavorite(articleId, favoriteId)) {
+         if (collectionArticleRepository.existsByArticleAndFavorite(articleId, favoriteId)) {
             throw new BadRequestException("Este articulo ya está en tus favoritos.");
         }
 
-        // Establecer la fecha en que se agrega el libro
         LocalDateTime addedDate = LocalDateTime.now();
+       collectionArticleRepository.addArticleToFavorite(articleId, favoriteId, addedDate);
 
-        // Agregar el libro a la colección
-        collectionArticleRepository.addArticleToFavorite(articleId, favoriteId, addedDate);
-
-        // Crear el objeto para devolver
         CollectionArticle collectionArticle = new CollectionArticle();
         collectionArticle.setArticle(articleId);
         collectionArticle.setFavorite(favoriteId);

@@ -15,7 +15,7 @@ public class Favorite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "created_at", nullable = false)
@@ -28,7 +28,4 @@ public class Favorite {
     @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_favorite_users"))
     private Reader reader;
 
-    /*@JsonIgnore
-    @OneToMany(mappedBy = "favorite", cascade = CascadeType.ALL)
-    private List<CollectionArticle> collectionArticles; */
 }

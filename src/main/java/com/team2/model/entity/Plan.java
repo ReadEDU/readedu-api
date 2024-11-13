@@ -14,6 +14,6 @@ public class Plan {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private Float price;
 }

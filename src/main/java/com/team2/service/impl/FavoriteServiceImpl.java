@@ -62,11 +62,11 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     @Transactional
     public FavoriteDetailsDTO updateFavorite(Integer favoriteId, FavoriteCreateUpdateDTO favoriteDTO) {
-        // Buscar la colección existente
+        // Buscar el favorito existente
         Favorite existingFavorite = favoriteRepository.findById(favoriteId)
                 .orElseThrow(() -> new ResourceNotFoundException("Favorite not found with ID: " + favoriteId));
 
-        // Actualizar los campos de la colección
+        // Actualizar los campos del favorito
         existingFavorite.setName(favoriteDTO.getName());
         existingFavorite.setUpdatedAt(LocalDateTime.now());
 
