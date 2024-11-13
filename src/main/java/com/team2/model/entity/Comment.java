@@ -12,16 +12,15 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
-    private LocalDateTime date;
-    private String author;
 
-    @ManyToOne
-    @JoinColumn(name = "reader_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_comment_reader"))
-    private Reader reader;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_comment_article"))
     private Article article;
+
 }
 

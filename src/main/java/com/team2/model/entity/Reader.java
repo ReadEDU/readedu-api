@@ -18,8 +18,8 @@ public class Reader {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "fullname")
-    private String fullname;
+    @Column(name = "biography", columnDefinition = "TEXT")
+    private String biography;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -30,4 +30,5 @@ public class Reader {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
 }
