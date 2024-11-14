@@ -52,6 +52,7 @@ public class UserMapper {
                 : (user.getCreator() != null) ? user.getCreator().getLastName()
                 : "User";
 
+        authResponseDTO.setId(user.getId());
         authResponseDTO.setFirstName(firstName);
         authResponseDTO.setLastName(lastName);
 
