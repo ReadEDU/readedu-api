@@ -14,4 +14,6 @@ public interface AdminArticleService {
     ArticleDetailsDTO create(ArticleCreateUpdateDTO articleCreateUpdateDTO);
     ArticleDetailsDTO update(Integer id, ArticleCreateUpdateDTO updateArticleDTO);
     void delete(Integer id);
+
+    List<ArticleDetailsDTO> findTop6ArticlesByCreatedAt();
 }

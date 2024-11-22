@@ -115,4 +115,12 @@ public class AdminArticleServiceImpl implements AdminArticleService {
                 .orElseThrow(() -> new RuntimeException("Articulo no encontrado con el id: " + id));
         articleRepository.delete(article);
     }
+
+    @Override
+    public List<ArticleDetailsDTO> findTop6ArticlesByCreatedAt() {
+        return articleRepository.findTop6ByOrderByCreatedAtDesc()
+                .stream()
+                .map(articleMapper::toDetailsDTO)
+                .toList();
+    }
 }
