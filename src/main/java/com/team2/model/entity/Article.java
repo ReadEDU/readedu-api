@@ -21,6 +21,9 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "cover_path")
+    private String coverPath;
+
     @Column(name = "file_path")
     private String filePath;
 
