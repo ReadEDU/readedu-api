@@ -2,7 +2,7 @@
 FROM openjdk:21-jdk-slim
 
 # Define la variable del archivo JAR
-ARG JAR_FILE=target/readedu-api-0.0.1.jar
+ARG JAR_FILE=target/readedu-api-0.0.3.jar
 
 # Copia el archivo JAR en el contenedor
 COPY ${JAR_FILE} readedu-api.jar

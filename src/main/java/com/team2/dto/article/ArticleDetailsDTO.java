@@ -10,6 +10,7 @@ public class ArticleDetailsDTO {
     private String title;
     private String slug;
     private String content;
+    private String coverPath;
     private String filePath;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -99,6 +99,7 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         articleFromDb.setTitle(updateArticle.getTitle());
         articleFromDb.setContent(updateArticle.getContent());
         articleFromDb.setSlug(updateArticle.getSlug());
+        articleFromDb.setCoverPath(updateArticle.getCoverPath());
         articleFromDb.setFilePath(updateArticle.getFilePath());
 
         articleFromDb.setCategory(category);

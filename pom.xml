@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.team2</groupId>
     <artifactId>readedu-api</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
     <name>readedu-api</name>
     <description>readedu-api</description>
     <url/>

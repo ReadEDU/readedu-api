@@ -20,6 +20,8 @@ public class ArticleCreateUpdateDTO {
     @NotBlank(message = "La descripción es obligatoria")
     private String content;
 
+    private String coverPath;
+
     private String filePath;
 
     @NotNull(message = "La categoría es obligatoria")

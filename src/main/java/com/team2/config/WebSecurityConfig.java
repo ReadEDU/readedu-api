@@ -49,7 +49,7 @@ public class WebSecurityConfig {
                         // Permitir acceso a los endpoints de registro y login sin autenticación
                         .requestMatchers(antMatcher("/auth/login")).permitAll()
                         .requestMatchers(antMatcher("/auth/register/reader")).permitAll()
-                        .requestMatchers(antMatcher("/auth/register/creator")).permitAll()
+                        .requestMatchers(antMatcher("/articles/recent")).permitAll()
                         .requestMatchers(antMatcher("/mail/**")).permitAll()
                         //.requestMatchers(antMatcher("/article/recent")).permitAll()
 

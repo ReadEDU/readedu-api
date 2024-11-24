@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/user/donation")
 @PreAuthorize("hasAnyRole('ADMIN', 'CREATOR')")
-
 public class DonationController {
     private final DonationService donationService;
 
