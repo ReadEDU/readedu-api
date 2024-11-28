@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,11 @@ public class HomeArticleController {
     public ResponseEntity<List<ArticleDetailsDTO>> getRecentArticles() {
         List<ArticleDetailsDTO> recentArticles = adminArticleService.findTop6ArticlesByCreatedAt();
         return new ResponseEntity<>(recentArticles, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ArticleDetailsDTO> get(@PathVariable Integer id){
+        ArticleDetailsDTO article = adminArticleService.findById(id);
+        return new ResponseEntity<>(article, HttpStatus.OK);
     }
 }

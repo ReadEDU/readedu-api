@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -36,10 +37,10 @@ public class AdminArticleServiceImpl implements AdminArticleService {
     @Transactional(readOnly = true)
     @Override
     public List<ArticleDetailsDTO> findAll() {
-        List<Article> articles = articleRepository.findAll();
-        return articles.stream()
-            .map(articleMapper::toDetailsDTO)
-            .toList();
+        return articleRepository.findAll()
+                .stream()
+                .map(articleMapper::toDetailsDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
